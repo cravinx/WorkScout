@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div class="card h-100 mb-4" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+  <div class="card-body">
+    <h5 class="card-title mb-3">All Applicants for {{job.title}} Position</h5>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Location</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Application Date</th>
+          <th scope="col">Action</th>
+          <th scope="col">Response</th>
+        </tr>
+      </thead>
+
+      <tbody class="table-group-divider">
+        {% for applicant in applicants %}
+        <tr>
+          <td>{{applicant.user.resume.first_name}}</td>
+          <td>{{applicant.user.resume.surname}}</td>
+          <td>{{applicant.user.resume.location}}</td>
+          <td>{{applicant.user.resume.job_title}}</td>
+          <td>{{applicant.timestamp | naturaltime }}</td>
+          <td class="d-flex justify-content-between">
+            <a href="{{applicant.user.resume.upload_resume.url}}">Download Resume</a>
+            
+
+            <form action="response" method="POST" class="d-grid gap-2">
+              {% csrf_token %}
+            <input type="hidden" value="{{applicant.user.id}}" name="username">
+            <select name="response" id="textInput" class="btn btn-primary btn-sm">
+              <option selected disabled>Respond</option>
+              <option value="Accept">Accept</option>
+              <option value="Decline">Decline</option>
+            </select>
+
+              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </form>
+          </td>
+
+          <td>
+            {% if applicant.is_accepted %}
+            <button type="submit" class="btn btn-success btn-sm">Accepted</button>
+            {% elif applicant.is_declined %}
+            <button type="submit" class="btn btn-danger btn-sm">Declined</button>
+            {% else %}
+            <button type="submit" class="btn btn-warning btn-sm">Pending</button>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

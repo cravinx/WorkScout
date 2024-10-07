@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+
+<div class="card h-100 mb-4 p-md-6" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+  <div class="card-body">
+    <h5 class="card-title mb-3" style="font-weight: 700;">Manage Jobs</h5>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Job Title</th>
+          <th scope="col">Location</th>
+          <th scope="col">Salary (NGN)</th>
+          <th scope="col">No. of Applicants</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <tbody class="table-group-divider">
+        {% for job in jobs %}
+        <tr>
+          <td>{{job.title}}</td>
+          <td>{{job.city}}</td>
+          <td>{{job.salary}}</td>
+          <td>{{job.applyjob_set.all.count}} &nbsp; <a href="{% url 'all-applicants' job.pk %}"><small>View All</small></a>
+        </td>
+          {% if job.is_available %}
+          <td><span class="badge bg-success">Active</span></td>
+          {% else %}
+          <td><span class="badge bg-warning">Not Active</span></td>
+          {% endif %}
+          <td class="flex">
+            <a class="nav-link" href="{% url 'update-job' job.pk %}">Update Job</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

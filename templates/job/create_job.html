@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card mx-auto" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+      <div class="card-body">
+        <h5 class="card-title mb-3" style="font-weight: 700;">Create a Job Ad</h5>
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Job Title</label>
+            {% render_field form.title class="form-control" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Salary</label>
+            {% render_field form.salary class="form-control" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">City</label>
+            {% render_field form.city class="form-control" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">State</label>
+            {% render_field form.state class="form-select" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Industry</label>
+            {% render_field form.industry class="form-select" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Job Type</label>
+            {% render_field form.job_type class="form-select" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Job Requirements</label>
+            {% render_field form.requirements|attr:'rows:2' class="form-control" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ideal Candidate</label>
+            {% render_field form.ideal_candidate|attr:'rows:2' class="form-control" %}
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Is this job available</label>
+            {% render_field form.is_available class="form-check-input" %}
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

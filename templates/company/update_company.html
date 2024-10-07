@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Create a Company</h5>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Company Name</label>
+                      {% render_field form.name class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Established Date</label>
+                      {% render_field form.est_date|attr:'type:date' class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">City</label>
+                      {% render_field form.city class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">State</label>
+                      {% render_field form.state class="form-control" %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

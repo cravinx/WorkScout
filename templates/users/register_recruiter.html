@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<form  class="p-4 p-md-6 border rounded-3" action="" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);" method="POST">
+    {% csrf_token %}
+    <div class="form-floating mb-3" style="font-size: 16px;">
+        {% render_field form.email class="form-control" %}
+        <label for="floatingInput" class="text-muted">Email address</label>
+    </div>
+    <div class="form-floating mb-3" style="font-size: 16px;">
+        {% render_field form.password1 class="form-control" %}
+        <label for="floatingInput" class="text-muted">Enter Password</label>
+    </div>
+    <div class="form-floating mb-3" style="font-size: 16px;">
+        {% render_field form.password2 class="form-control" %}
+        <label for="floatingInput" class="text-muted">Confirm Password</label>
+    </div>
+    <button class="w-100 btn btn-lg" style="background-color: #182848; color: #e6e9f0; font-weight: 600;" type="submit">Sign Up</button>
+    <hr class="my-4">
+    <small class="text-muted">Already have an account? <a href="{% url 'login' %}">Sign In</a></small>
+</form>
+{% endblock content %}
