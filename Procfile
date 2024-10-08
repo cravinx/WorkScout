@@ -1,0 +1,1 @@
+web gunicorn todocb.wsgi:application --log-file -
