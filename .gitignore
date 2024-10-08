@@ -38,7 +38,6 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
-settings.py
 
 
 # Visual Studio Code # 
