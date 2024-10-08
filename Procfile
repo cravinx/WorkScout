@@ -1,1 +1,1 @@
-web gunicorn todocb.wsgi:application --log-file -
+web gunicorn myjob_app.wsgi:application --log-file -
