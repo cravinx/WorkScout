@@ -92,10 +92,15 @@ WSGI_APPLICATION = 'myjob_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': 'autorack.proxy.rlwy.net:18631',
+        'PORT': '5432'
     }
 }
+DATABASE_URL = os.environ['DATABASE_URL']
 
 
 # Password validation
@@ -134,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'static')
 STATICFILES_URL = (os.path.join(BASE_DIR, 'static'))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -147,7 +152,7 @@ django_heroku.settings(locals())
 import dj_database_url
 
 if os.environ.get('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
+    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600, ssl_require=True)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
