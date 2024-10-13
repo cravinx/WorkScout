@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); text-align: center;">
+        <div class="container-fluid py-2">
+            <h1 class="display-5 fw-bold mb-4"><span style="color: #3265b1;">WorkScout.</span> Get Hired Quickly!</h1>
+
+            <div class="card h-100">
+              <div class="card-body">
+                <form class="row gy-2 gx-1 align-items-center" method="GET">
+                  <div class="col-sm-2">
+                    <label for="autoSizingInput">Name</label>
+                    {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="Job Keyword" %}
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="autoSizingInput">Select Location</label>
+                    {% render_field filter.form.state class="form-select" id="autoSizingInput" %}
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="autoSizingInput">Choose Job Type</label>
+                    {% render_field filter.form.job_type class="form-select" id="autoSizingInput" %}
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="autoSizingInput">Select Industry</label>
+                    {% render_field filter.form.industry class="form-select" id="autoSizingInput" %}
+                  </div>
+
+                  <div class="col-sm-1 align-self-end">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <p class="card-text" style="margin-top: 1.2em; font-weight: 600;"> 
+                Welcome to WorkScout! Search and get your dream job. We have thousands of job offerings for
+                you. <br> Don't forget to leave a like when you get a job. Goodluck with your job hunt!
+            </p>
+            <a href="{% url 'job-listing' %}" type="button" class="btn btn-outline-primary">More Jobs</a>
+        </div>
+    </div>
+</section> 
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+  {% for job in filter.qs %}
+  <div class="col">
+    <div class="card h-100" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+      <div class="card-body">
+        <h5 class="card-title">{{job.title}}</h5>
+        <p class="card-text">Industry: {{job.industry}}</p>
+        <p class="card-text">Job Type: {{job.job_type}}</p>
+        <p class="card-text">Location: {{job.city}}</p>
+        <p class="card-text">Salary: {{job.salary}}</p>
+        <p class="card-text">Posted by: {{job.company.name}}</p>
+        <a href="{% url 'job-details' job.pk %}" class="btn btn-primary">View Details</a>
+      </div>
+      <div class="card-footer text-muted">Created {{job.timestamp | naturaltime}}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+
+{% endblock content %}

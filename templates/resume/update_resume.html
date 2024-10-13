@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+            <div class="card-body">
+                <h5 class="card-title mb-3" style="font-weight: 700;">Create a Resume</h5>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">First Name</label>
+                      {% render_field form.first_name class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Surname</label>
+                      {% render_field form.surname class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Location</label>
+                      {% render_field form.location class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Job Title</label>
+                      {% render_field form.job_title class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Upload Resume</label>
+                      {% render_field form.upload_resume class="form-control" %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

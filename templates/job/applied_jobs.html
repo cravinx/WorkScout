@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+
+<div class="card h-100 mb-4" style="background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);">
+  <div class="card-body">
+    <h5 class="card-title mb-3" style="font-weight: 700;">Manage Jobs</h5>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Job Title</th>
+          <th scope="col">Location</th>
+          <th scope="col">Salary (NGN)</th>
+          <th scope="col">Job Type</th>
+          <th scope="col">Industry</th>
+          <th scope="col">Action</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+
+      <tbody class="table-group-divider">
+        {% for job in jobs %}
+        <tr>
+          <td>{{job.job.title}}</td>
+          <td>{{job.job.city}}</td>
+          <td>{{job.job.salary}}</td>
+          <td>{{job.job.job_type}}</td>
+          <td>{{job.job.industry}}</td>
+          <td class="d-flex justify-content-between">
+            <a class="nav-link" href="{% url 'job-details' job.job.pk %}">View Job</a>
+          </td>
+          <td>
+            {% if job.is_accepted %}
+            <button type="submit" class="btn btn-success btn-sm">Accepted</button>
+            {% elif job.is_declined %}
+            <button type="submit" class="btn btn-danger btn-sm">Declined</button>
+            {% else %}
+            <button type="submit" class="btn btn-warning btn-sm">Pending</button>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
