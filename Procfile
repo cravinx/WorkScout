@@ -1,0 +1,1 @@
+web gunicorn workscout.wsgi:application --log-file -
