@@ -1,1 +1,1 @@
-web gunicorn 'workscout.wsgi'
+web: gunicorn workscout.wsgi
