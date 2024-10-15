@@ -109,12 +109,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': os.getenv['POSTGRES_PASSWORD'],
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'autorack.proxy.rlwy.net:16301',
         'PORT': '5432'
     }
 }
-DATABASE_URL = os.getenv['DATABASE_URL']
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 # Password validation
@@ -179,6 +179,6 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER="unegbuprecious25@gmail.com"
-EMAIL_HOST_PASSWORD= os.getenv['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_PASSWORD= os.getenv('EMAIL_HOST_PASSWORD')
 
 ACCOUNT_USERNAME_BLACKLIST = ['admin', 'accounts', 'profile', 'category', 'post', 'inbox', 'theboss']
