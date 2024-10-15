@@ -10,12 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from dotenv import load_dotenv
 from pathlib import Path
+
+from dotenv import load_dotenv
 import os
-from django.core.exceptions import ImproperlyConfigured
 
 import dj_database_url
+
 from environ import Env
 env = Env()
 Env.read_env()
@@ -32,15 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-def get_env_variable(var_name, default_value=None):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        if default_value is not None:
-            return default_value
-        raise ImproperlyConfigured(f"Set the {var_name} environment variable")
     
-SECRET_KEY = get_env_variable('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
+print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENVIRONMENT == 'development':
